@@ -5,23 +5,18 @@ const {
   ServiceManager
 } = require('@jtbnntt/service-manager');
 
-const AnagramService = require('./anagram-service');
+const { builder: anagramServiceBuilder } = require('./anagram-service');
 
 const LOGGER = logging.createLogger('Anagrams');
 const ANAGRAM_SERVICE = 'anagramService';
 const ENABLE_FILENAME = 'enable1.txt';
 
-LOGGER.info('Creating service builders')
-const builders = new Map()
-  .set(
-    ANAGRAM_SERVICE,
-    (_, { wordFilename }) => new AnagramService(wordFilename)
-  );
-
 LOGGER.info('Creating ServiceManager')
 const serviceManager = new ServiceManager(
   { wordFilename: ENABLE_FILENAME },
-  builders
+  new Map([
+    [ANAGRAM_SERVICE, anagramServiceBuilder]
+  ])
 );
 
 LOGGER.info('Getting AnagramService');
