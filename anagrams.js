@@ -8,19 +8,19 @@ const {
 const { builder: anagramServiceBuilder } = require('./anagram-service');
 
 const LOGGER = logging.createLogger('Anagrams');
-const ANAGRAM_SERVICE = 'anagramService';
+const ANAGRAM_SERVICE_KEY = 'anagramService';
 const ENABLE_FILENAME = 'enable1.txt';
 
 LOGGER.info('Creating ServiceManager')
 const serviceManager = new ServiceManager(
   { wordFilename: ENABLE_FILENAME },
   new Map([
-    [ANAGRAM_SERVICE, anagramServiceBuilder]
+    [ANAGRAM_SERVICE_KEY, anagramServiceBuilder]
   ])
 );
 
 LOGGER.info('Getting AnagramService');
-const anagramService = serviceManager.getService(ANAGRAM_SERVICE);
+const anagramService = serviceManager.getService(ANAGRAM_SERVICE_KEY);
 
 const app = express();
 
